@@ -25,7 +25,6 @@ export const Header = styled.header`
     display: flex;
     align-items: center;
 
-    cursor: pointer;
     user-select: none;
 
     // states
@@ -66,6 +65,10 @@ export const Header = styled.header`
     }
 
     // children
+    svg,
+    path {
+      cursor: pointer;
+    }
 
     h1 {
       width: 100%;

@@ -19,7 +19,7 @@ function Home() {
 
   if (rooms) {
     mainContent = rooms.map((room) => (
-      <Link to={"dashboard/room/" + room.id} key={room.id}>
+      <Link to={"room/" + room.id} key={room.id}>
         <RoomCard {...room} />
       </Link>
     ));

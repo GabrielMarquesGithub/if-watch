@@ -15,12 +15,8 @@ function Header({ size = "base", background }: IHeaderProps) {
   };
 
   return (
-    <S.Header
-      className={`${size} ${background && "background"}`}
-      onClick={handleClick}
-      role="link"
-    >
-      <LogoIcon />
+    <S.Header className={`${size} ${background && "background"}`} role="link">
+      <LogoIcon onClick={handleClick} />
       <Text is="h1" size={size === "base" ? "huge" : "big"}>
         Watch
       </Text>

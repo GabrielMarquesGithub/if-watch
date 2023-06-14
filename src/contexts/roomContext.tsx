@@ -1,18 +1,10 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import {
-  ref,
-  get,
-  push,
-  set,
-  onChildAdded,
-  onChildChanged,
-} from "firebase/database";
-
-import { database } from "../services/firebase";
+import { createContext, ReactNode, useState } from "react";
 
 import { ICreateRoomModel, IRoomModel } from "../models/room.model";
-import { IRoomInfoModel } from "../models/roomInfo.model";
+import { ICreateRoomInfoModel } from "../models/roomInfo.model";
 import { useListener } from "../hooks/useListener";
+import { useSetData } from "../hooks/useSetData";
+import { useGetData } from "../hooks/useGetData";
 
 interface IRoomContext {
   rooms: IRoomModel[] | null;
@@ -30,68 +22,38 @@ export const roomContext = createContext<IRoomContext>(BASE);
 
 export function RoomProvider({ children }: { children: ReactNode }) {
   const [rooms, setRooms] = useState<IRoomModel[] | null>(null);
-  const [, setError] = useState<Error | null>(null);
-
-  // Convertendo o formato vindo do realtime em array para facilitar formatações
-  const mapToArray = (object: { [key: string]: IRoomModel }): IRoomModel[] => {
-    return Object.values(object);
-  };
+  const [error, setError] = useState<Error | null>(null);
 
   const getRoom = (roomId: string) => {
     if (!rooms) return null;
     return rooms.find((room) => room.id === roomId) ?? null;
   };
 
-  const setRoom = (room: ICreateRoomModel) => {
-    const roomsRef = ref(database, "rooms");
-    const roomsInfoRef = ref(database, "roomsInfo");
-    // Usando push para definir key
-    const newRoomRef = push(roomsRef);
-    const newRoomInfoRef = push(roomsInfoRef);
-    newRoomInfoRef;
-
-    if (!newRoomRef.key || !newRoomInfoRef.key) return;
-
-    // Criando nova sala
-    const roomData: IRoomModel = {
-      id: newRoomRef.key,
-      roomInfoId: newRoomInfoRef.key,
-      ...room,
-    };
-
-    set(newRoomRef, roomData);
-
-    const roomInfoData: IRoomInfoModel = {
-      id: newRoomInfoRef.key,
-      roomId: newRoomRef.key,
+  const setRoom = async (room: ICreateRoomModel) => {
+    // Criando dados zerados para o inicio da sala
+    const roomInfo: ICreateRoomInfoModel = {
       amountOfPeople: 0,
       moisture: 0,
       temperature: 0,
       date: new Date().getTime(),
     };
 
-    // Criando novas info para a sala
-    set(newRoomInfoRef, roomInfoData);
+    let roomInfoId: string;
+
+    await useSetData("roomsInfo", (dataRef) => {
+      roomInfoId = dataRef ?? "";
+      return { ...roomInfo, id: dataRef };
+    });
+
+    await useSetData<IRoomModel>("rooms", (dataRef) => {
+      return { ...room, id: dataRef, roomInfoId: roomInfoId };
+    });
   };
 
-  // useEffect para realizar o primeiro download
-  useEffect(() => {
-    const roomsListRef = ref(database, "rooms");
-
-    // listener do firebase para eventos de mudança em uma unica sala
-    // Usando then por estar dentro do useEffect
-    get(roomsListRef).then((snapshot) => {
-      const roomsData = snapshot.val();
-      if (roomsData) {
-        setRooms(mapToArray(roomsData));
-      }
-    });
-  }, []);
+  useGetData<IRoomModel[]>("rooms", (data) => setRooms(data));
 
   useListener<IRoomModel>(
-    "rooms",
-    "child_changed",
-    onChildChanged,
+    { path: "rooms", eventType: "child_changed" },
     (data) =>
       setRooms(
         (prevRooms) =>
@@ -104,9 +66,7 @@ export function RoomProvider({ children }: { children: ReactNode }) {
   );
 
   useListener<IRoomModel>(
-    "rooms",
-    "child_added",
-    onChildAdded,
+    { path: "rooms", eventType: "child_added" },
     (data) =>
       setRooms((prevRooms) => (prevRooms ? [...prevRooms, data] : [data])),
     (error) => {

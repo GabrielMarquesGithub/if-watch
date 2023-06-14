@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import { onValue } from "firebase/database";
 
 import { ReactComponent as PersonIcon } from "../../assets/icons/person.svg";
 import { ReactComponent as DropIcon } from "../../assets/icons/drop.svg";
@@ -21,18 +20,21 @@ function Room() {
   const { roomId } = useParams();
 
   // Verificações de dados
-  if (!roomId) return;
+  if (!roomId) throw new Error("Empty room id");
   const room = getRoom(roomId);
 
-  if (!room) return;
+  if (!room) throw new Error("Room does not exist");
 
   useListener<IRoomInfoModel>(
-    "roomsInfo/" + room.roomInfoId,
-    "value",
-    onValue,
+    {
+      path: "roomsInfo/" + room.roomInfoId,
+      eventType: "changed",
+      useEffectTrigger: roomId,
+    },
     (data) => setRoomInfo(data),
-    () => setRoomInfo(null),
-    roomId
+    (error) => {
+      throw error;
+    }
   );
 
   if (!roomInfo) return;

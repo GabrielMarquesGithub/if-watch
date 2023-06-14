@@ -14,19 +14,24 @@ import { Header } from "../../components/Header";
 const ITEMS_PER_PAGE = 5;
 
 function Dashboard() {
+  // Salas
   const { rooms } = useContext(roomContext);
   const { roomId } = useParams();
+
+  //Paginação
   const [page, setPage] = useState(1);
 
-  if (!roomId || !rooms) {
-    return <S.Container>Dados não existem</S.Container>;
-  }
+  if (!rooms) return;
 
-  // cálculo de paginação
+  // Cálculo de paginação
   const shownRooms = rooms.slice(
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE
   );
+
+  // Logica de mostrar botões
+  const showDecreaseButton = page < 2;
+  const showIncreaseButton = page * ITEMS_PER_PAGE >= rooms.length;
 
   return (
     <S.Container>
@@ -34,15 +39,13 @@ function Dashboard() {
         <Header size="small" />
         <ul>
           {shownRooms.map((room) => (
-            <>
-              <Link to={"room/" + room.id} key={room.id}>
-                <RoomListItem {...room} active={roomId == room.id} />
-              </Link>
-            </>
+            <Link to={"room/" + room.id} key={room.id}>
+              <RoomListItem {...room} active={roomId == room.id} />
+            </Link>
           ))}
         </ul>
         <footer>
-          {page < 2 || (
+          {showDecreaseButton || (
             <span className="decrease-button">
               <Button
                 onClick={() => setPage(page - 1)}
@@ -55,7 +58,7 @@ function Dashboard() {
               </Button>
             </span>
           )}
-          {page * ITEMS_PER_PAGE >= rooms.length || (
+          {showIncreaseButton || (
             <span className="increase-button">
               <Button
                 onClick={() => setPage(page + 1)}
