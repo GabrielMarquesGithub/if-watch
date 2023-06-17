@@ -7,14 +7,12 @@ import * as S from "./styles";
 
 import roomContext from "../../contexts/roomContext";
 
-import { RoomCard } from "../../components/RoomCard";
 import { HeaderWithIcon } from "../../components/HeaderWithIcon";
 import { Text } from "../../components/Text";
 import { ICreateRoomModel } from "../../models/room.model";
 import { Input } from "../../components/Input";
 import { Textarea } from "../../components/Textarea";
 import { Button } from "../../components/Button";
-import { Header } from "../../components/Header";
 
 const BASE: ICreateRoomModel = {
   name: "",
@@ -31,7 +29,11 @@ function CreateRoom() {
   const navigate = useNavigate();
   const [newRoom, setNewRoom] = useState<ICreateRoomModel>(BASE);
 
+  const invalidSubmit = !newRoom.name || !newRoom.local || !newRoom.description;
+
   const handleSubmit = () => {
+    if (invalidSubmit) return;
+
     setRoom(newRoom);
     navigate("/");
   };
@@ -39,12 +41,10 @@ function CreateRoom() {
   return (
     <>
       <S.Container>
-        <Header background />
         <section>
-          <section>
-            <HeaderWithIcon icon={<PlusIcon />} full title="Criação de Sala" />
-            <RoomCard disabled {...newRoom} />
-          </section>
+          <HeaderWithIcon icon={<PlusIcon />} title="Criação de Sala" />
+        </section>
+        <section>
           <main>
             <Input
               type="text"
@@ -52,6 +52,7 @@ function CreateRoom() {
               spellCheck={true}
               aria-label="Digite o nome da sala"
               placeholder="Nome da sala"
+              error={!newRoom.name}
               onChange={(e) =>
                 setNewRoom((room) => ({ ...room, name: e.target.value }))
               }
@@ -62,6 +63,7 @@ function CreateRoom() {
               spellCheck={true}
               aria-label="Digite o local da sala"
               placeholder="Local da sala"
+              error={!newRoom.local}
               onChange={(e) =>
                 setNewRoom((room) => ({ ...room, local: e.target.value }))
               }
@@ -71,6 +73,7 @@ function CreateRoom() {
               spellCheck={true}
               aria-label="Digite uma descrição para a sala"
               placeholder="Descrição da sala"
+              error={!newRoom.description}
               onChange={(e) =>
                 setNewRoom((room) => ({ ...room, description: e.target.value }))
               }
@@ -79,7 +82,8 @@ function CreateRoom() {
               onClick={handleSubmit}
               title="Criar nova sala"
               role="submit"
-              size="full"
+              shape="full"
+              disabled={invalidSubmit}
             >
               <Text is="p">Criar Sala</Text>
             </Button>

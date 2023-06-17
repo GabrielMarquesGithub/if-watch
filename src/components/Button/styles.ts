@@ -10,9 +10,8 @@ export const Button = styled.button`
       transition,
     },
   }) => css`
-    height: 60px;
     padding: 0 ${spacing[10]};
-    border: 3px solid ${translucentBackground.secondary};
+    border: none;
     border-radius: ${borderRadius.base};
 
     overflow: hidden;
@@ -21,7 +20,7 @@ export const Button = styled.button`
     justify-content: center;
     align-items: center;
 
-    background: ${background.primary};
+    background: ${translucentBackground.primary};
     backdrop-filter: ${filter.blur};
 
     user-select: none;
@@ -30,13 +29,20 @@ export const Button = styled.button`
     transition: ${transition.slow};
     // states
     &:hover {
-      border-color: ${background.primary};
-      background-color: ${translucentBackground.secondary};
+      background-color: ${background.primary};
+    }
+
+    &:disabled {
+      background: ${translucentBackground.primary};
+      cursor: default;
+
+      * {
+        opacity: 0.5;
+      }
     }
 
     // variants
     &.transparent {
-      border-color: transparent;
       background-color: transparent;
       backdrop-filter: none;
 
@@ -47,9 +53,25 @@ export const Button = styled.button`
     }
 
     // size
+    &.base {
+      height: 60px;
+    }
+
+    &.small {
+      height: 40px;
+    }
+
+    // shape
     &.squared {
-      max-width: 60px;
-      min-width: 60px;
+      &.base {
+        max-width: 60px;
+        min-width: 60px;
+      }
+
+      &.small {
+        max-width: 40px;
+        min-width: 40px;
+      }
     }
 
     &.full {

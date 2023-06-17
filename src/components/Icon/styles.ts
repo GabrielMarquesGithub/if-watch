@@ -29,13 +29,36 @@ export const Container = styled.div`
       &,
       svg,
       path {
-        max-width: 25px;
-        max-height: 25px;
+        max-width: 60px;
+        max-height: 60px;
+      }
+    }
+
+    &.huge {
+      &,
+      svg,
+      path {
+        max-width: 100px;
+        max-height: 100px;
       }
     }
 
     //variants
-    &.activated {
+    &.info {
+      svg,
+      path {
+        fill: ${semantic.info};
+      }
+    }
+
+    &.error {
+      svg,
+      path {
+        fill: ${semantic.error};
+      }
+    }
+
+    &.success {
       svg,
       path {
         fill: ${semantic.success};

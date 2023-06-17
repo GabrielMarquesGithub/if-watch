@@ -14,6 +14,7 @@ export const Container = styled.div`
     theme: {
       filter: { blur },
       colors: { translucentBackground },
+      spacing,
     },
   }) => css`
     display: flex;
@@ -21,10 +22,10 @@ export const Container = styled.div`
     // children
     aside {
       height: 100vh;
-      width: 300px;
+      min-width: 300px;
 
       display: grid;
-      grid-template-rows: 120px 1fr 80px;
+      grid-template-rows: 100px 1fr 100px;
 
       background: ${translucentBackground.secondary};
       backdrop-filter: ${blur};
@@ -34,12 +35,18 @@ export const Container = styled.div`
       // children
       header {
         justify-self: center;
-        max-width: 200px;
+
+        padding: ${spacing[20]};
+      }
+
+      ul {
+        display: grid;
+        gap: 0px;
+        grid-template-rows: repeat(5, 1fr);
       }
 
       footer {
-        width: 200px;
-        margin: 0 auto;
+        padding: ${spacing[20]};
 
         .decrease-button {
           display: inline-block;

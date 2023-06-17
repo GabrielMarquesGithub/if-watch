@@ -22,9 +22,21 @@ function RoomListItem({
         {name}
       </Text>
       <div className="icon-container">
-        <Icon icon={<PersonIcon />} size="small" activated={movement} />
-        <Icon icon={<DoorIcon />} size="small" activated={openDoor} />
-        <Icon icon={<AirIcon />} size="small" activated={airOn} />
+        <Icon
+          icon={<PersonIcon />}
+          size="small"
+          color={movement ? "success" : undefined}
+        />
+        <Icon
+          icon={<DoorIcon />}
+          size="small"
+          color={openDoor ? "success" : undefined}
+        />
+        <Icon
+          icon={<AirIcon />}
+          size="small"
+          color={airOn ? "success" : undefined}
+        />
       </div>
     </S.Container>
   );

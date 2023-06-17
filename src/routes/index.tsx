@@ -5,18 +5,24 @@ import { Dashboard } from "./Dashboard";
 import { Room } from "./Room";
 import { CreateRoom } from "./CreateRoom";
 import { ErrorBoundary } from "./Error";
+import { Root } from "./Root";
 
 // fetch functions
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />,
+    element: <Root />,
     errorElement: <ErrorBoundary />,
-  },
-  {
-    path: "/create",
-    element: <CreateRoom />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/create",
+        element: <CreateRoom />,
+      },
+    ],
   },
   {
     element: <Dashboard />,

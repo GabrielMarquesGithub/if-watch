@@ -19,6 +19,15 @@ export const Container = styled.div`
   }) => css`
     width: 100%;
 
+    //state
+    &.isLoading {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    // children
     header {
       height: 80px;
       padding: ${spacing[20]};
@@ -35,6 +44,12 @@ export const Container = styled.div`
 
       animation: ${headerApearAnimation} 400ms;
       // children
+      .name-container {
+        display: flex;
+        align-items: center;
+        gap: ${spacing[10]};
+      }
+
       .icon-container {
         display: flex;
         align-items: center;

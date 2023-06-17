@@ -23,7 +23,7 @@
     /* Para SVG files */
     "types": ["vite-plugin-svgr/client"]
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "src/templates"],
+  "include": ["src", "unused/Header"],
+  "exclude": ["node_modules", "unused", "src/templates"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

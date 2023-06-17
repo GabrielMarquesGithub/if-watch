@@ -26,24 +26,21 @@ function RoomCard({
             <Icon
               icon={<PersonIcon />}
               size="small"
-              activated={movement}
-              background
+              color={movement ? "success" : undefined}
             />
           </span>
           <span>
             <Icon
               icon={<DoorIcon />}
               size="small"
-              activated={openDoor}
-              background
+              color={openDoor ? "success" : undefined}
             />
           </span>
           <span>
             <Icon
               icon={<AirIcon />}
               size="small"
-              activated={airOn}
-              background
+              color={airOn ? "success" : undefined}
             />
           </span>
         </div>

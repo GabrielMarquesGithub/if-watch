@@ -8,8 +8,8 @@ export const Container = styled.li`
       colors: { brand, translucentBrand },
     },
   }) => css`
-    width: 300px;
-    height: 70px;
+    width: 100%;
+    height: 100%;
     padding: 0 40px;
 
     position: relative;
@@ -26,8 +26,8 @@ export const Container = styled.li`
     &::before {
       content: " ";
 
-      width: 300px;
-      height: 70px;
+      width: 100%;
+      height: 100%;
       border-right: 3px solid transparent;
 
       position: absolute;
@@ -49,6 +49,10 @@ export const Container = styled.li`
 
         transform: translateX(0px);
       }
+    }
+
+    &.active {
+      cursor: default;
     }
 
     // children

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const Input = styled.input`
   ${({
     theme: {
-      colors: { text, translucentBackground, background },
+      colors: { text, translucentBackground, background, semantic },
       typography: { fontFamily, fontWeight, fontSize },
       filter,
       spacing,
@@ -42,6 +42,10 @@ export const Input = styled.input`
 
     &:hover {
       background: ${translucentBackground.primary};
+    }
+
+    &[aria-invalid="true"] {
+      border: 3px solid ${semantic.error};
     }
   `}
 `;

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 
+import { ReactComponent as LogoIcon } from "../../assets/icons/logo.svg";
 import { ReactComponent as ArrowIcon } from "../../assets/icons/arrow.svg";
 
 import * as S from "./styles";
@@ -9,19 +10,19 @@ import { roomContext } from "../../contexts/roomContext";
 import { RoomListItem } from "../../components/RoomListItem";
 import { Icon } from "../../components/Icon";
 import { Button } from "../../components/Button";
-import { Header } from "../../components/Header";
 
 const ITEMS_PER_PAGE = 5;
 
 function Dashboard() {
   // Salas
-  const { rooms } = useContext(roomContext);
+  let { rooms } = useContext(roomContext);
   const { roomId } = useParams();
 
   //Paginação
   const [page, setPage] = useState(1);
 
-  if (!rooms) return;
+  // Validando se rooms existem
+  rooms = rooms ?? [];
 
   // Cálculo de paginação
   const shownRooms = rooms.slice(
@@ -36,7 +37,11 @@ function Dashboard() {
   return (
     <S.Container>
       <aside>
-        <Header size="small" />
+        <header>
+          <Link to="/">
+            <Icon icon={<LogoIcon />} size="big" />
+          </Link>
+        </header>
         <ul>
           {shownRooms.map((room) => (
             <Link to={"room/" + room.id} key={room.id}>
@@ -51,7 +56,7 @@ function Dashboard() {
                 onClick={() => setPage(page - 1)}
                 title="Voltar para pagina anterior"
                 role="button"
-                size="squared"
+                shape="squared"
                 variant="transparent"
               >
                 <Icon size="small" icon={<ArrowIcon />} />
@@ -64,7 +69,7 @@ function Dashboard() {
                 onClick={() => setPage(page + 1)}
                 title="Ir para a proxima pagina"
                 role="button"
-                size="squared"
+                shape="squared"
                 variant="transparent"
               >
                 <Icon size="small" icon={<ArrowIcon />} />

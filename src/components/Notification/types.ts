@@ -1,5 +1,5 @@
 export interface INotificationProps {
   message: string;
-  duration: number;
+  duration?: number;
   onClose: () => void;
 }

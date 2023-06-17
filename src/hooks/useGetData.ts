@@ -3,23 +3,32 @@ import { ref, get } from "firebase/database";
 import { database } from "../services/firebase";
 
 // Função feita para englobar a execução de gets pelo firebase
-async function useGetData<T>(
+function useGetData<T>(
   path: string,
   action: (data: T) => void,
-  callback?: (error: Error) => void
+  callback: (error: Error) => void
 ) {
-  const dataRef = ref(database, path);
+  try {
+    const dataRef = ref(database, path);
 
-  // Usando await em preferencia ao then para resolução da promise
-  const snapshot = await get(dataRef);
+    if (!dataRef) {
+      return callback && callback(new Error("Empty location reference"));
+    }
 
-  const roomsData = snapshot.val();
-  if (!roomsData) {
-    callback && callback(new Error("Empty data"));
+    get(dataRef).then((snapshot) => {
+      const roomsData = snapshot.val();
+
+      if (!roomsData) {
+        return callback && callback(new Error("Empty data"));
+      }
+      console.log(roomsData);
+      // Convertendo o formato vindo do realtime em array para facilitar formatações
+      // Isso está sendo feito aqui para evitar acoplamento
+      action(Object.values(roomsData) as T);
+    });
+  } catch (err) {
+    return callback && callback(err as Error);
   }
-  // Convertendo o formato vindo do realtime em array para facilitar formatações
-  // Isso está sendo feito aqui para evitar acoplamento
-  action(Object.values(roomsData) as T);
 }
 
 export { useGetData };

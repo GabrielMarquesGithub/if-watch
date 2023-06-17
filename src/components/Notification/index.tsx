@@ -5,13 +5,10 @@ import * as S from "./styles";
 
 import { Text } from "../Text";
 import { Icon } from "../Icon";
-import { ReactComponent as CloseIcon } from "../../assets/icons/close.svg";
+import { ReactComponent as PlusIcon } from "../../assets/icons/plus.svg";
+import { Button } from "../Button";
 
-function Notification({
-  message,
-  duration = 3000,
-  onClose,
-}: INotificationProps) {
+function Notification({ message, duration = 6, onClose }: INotificationProps) {
   const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
@@ -19,10 +16,9 @@ function Notification({
 
     const timeout = setTimeout(() => {
       setShowNotification(false);
-      if (onClose) {
-        onClose();
-      }
-    }, duration);
+
+      onClose();
+    }, duration * 1000);
 
     return () => {
       clearTimeout(timeout);
@@ -31,9 +27,8 @@ function Notification({
 
   const closeNotification = () => {
     setShowNotification(false);
-    if (onClose) {
-      onClose();
-    }
+
+    onClose();
   };
 
   if (!showNotification) {
@@ -42,14 +37,21 @@ function Notification({
 
   return (
     <S.Container>
-      <div className="content">
-        <Text is="p" size="small">
-          {message}
-        </Text>
-        <button className="close-button" onClick={closeNotification}>
-          <Icon icon={<CloseIcon />} size="small" />
-        </button>
-      </div>
+      <Text is="p" size="small">
+        {message}
+      </Text>
+      <Button
+        title="Fechar notificação"
+        role="button"
+        shape="squared"
+        size="small"
+        variant="transparent"
+        onClick={closeNotification}
+      >
+        <span>
+          <Icon icon={<PlusIcon />} size="small" />
+        </span>
+      </Button>
     </S.Container>
   );
 }

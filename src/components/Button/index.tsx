@@ -2,13 +2,14 @@ import { IButtonProps } from "./types";
 import * as S from "./styles";
 
 function Button({
-  size,
+  size = "base",
   title,
+  shape,
   variant,
   disabled = false,
   ...rest
 }: IButtonProps) {
-  const classNames = `${size} ${variant}`;
+  const classNames = `${size} ${variant} ${shape}`;
 
   return (
     <S.Button
@@ -16,7 +17,7 @@ function Button({
       aria-label={title}
       aria-disabled={disabled}
       disabled={disabled}
-      className={"button " + classNames}
+      className={classNames}
       {...rest}
     />
   );

@@ -7,6 +7,7 @@ type buttonPropsType = Required<
 
 export interface IButtonProps extends buttonPropsType {
   role: "submit" | "button" | "link";
-  size?: "squared" | "full";
+  size?: "base" | "small";
   variant?: "transparent";
+  shape?: "squared" | "full";
 }

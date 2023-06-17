@@ -9,14 +9,10 @@ const mainApearAnimation = keyframes`
 }
 `;
 
-export const Container = styled.div`
-  ${({ theme: { container, spacing, transition } }) => css`
-    width: ${container.large};
-    margin: 0px auto;
-
+export const Container = styled.section`
+  ${({ theme: { spacing, transition } }) => css`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: ${spacing[20]};
 
     // children
@@ -26,7 +22,7 @@ export const Container = styled.div`
       align-items: center;
       justify-content: space-between;
 
-      .button {
+      button {
         .icon {
           transform: rotate(0deg);
           transition: ${transition.slow};
@@ -49,6 +45,13 @@ export const Container = styled.div`
       row-gap: ${spacing[20]};
 
       animation: ${mainApearAnimation} 1.5s;
+
+      &.isLoading {
+        display: flex;
+        justify-content: center;
+
+        animation: none;
+      }
     }
   `}
 `;

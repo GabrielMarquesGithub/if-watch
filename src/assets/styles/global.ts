@@ -46,6 +46,14 @@ const GlobalStyle = createGlobalStyle`
       background-color: ${background.tertiary};
     }
 
+    html {
+      overflow-y: scroll;
+
+      & > *::-webkit-scrollbar {
+        background-color: ${background.secondary};
+      }
+    }
+
     body {
       height: 100vh;
 
