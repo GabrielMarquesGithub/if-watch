@@ -16,10 +16,9 @@ function RoomCard({
   movement,
   openDoor,
   airOn,
-  disabled,
 }: IRoomCardProps) {
   return (
-    <S.Container className={`${disabled && "disabled"}`}>
+    <S.Container>
       <div className="image-container">
         <div className="icon-container">
           <span>

@@ -21,6 +21,19 @@ function Root() {
         </header>
         <Outlet />
       </S.Container>
+      <S.Footer>
+        <Text is="p" size="small">
+          &copy; 2023 IF Maker. Todos os direitos reservados.
+        </Text>
+        <nav>
+          <Text is="p" size="small" hover>
+            <Link to="/contato">Sobre</Link>
+          </Text>
+          <Text is="p" size="small" hover>
+            <Link to="/contato">Contato</Link>
+          </Text>
+        </nav>
+      </S.Footer>
     </>
   );
 }

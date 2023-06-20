@@ -19,6 +19,7 @@ export const Container = styled.div`
     },
   }) => css`
     width: ${container.large};
+    min-height: 100vh;
     margin: 0px auto;
 
     display: flex;
@@ -52,11 +53,53 @@ export const Container = styled.div`
           z-index: -1;
 
           background: ${translucentBackground.secondary};
-          backdrop-filter: ${filter.blur};
 
           animation: ${headerApearAnimation} 2s;
         }
       }
+    }
+
+    footer {
+      width: 100vh;
+      height: 25vh;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: ${spacing[5]};
+
+      background: ${translucentBackground.secondary};
+
+      nav {
+        display: flex;
+        gap: ${spacing[10]};
+      }
+    }
+  `}
+`;
+
+export const Footer = styled.footer`
+  ${({
+    theme: {
+      colors: { background },
+      spacing,
+    },
+  }) => css`
+    height: 20vh;
+    margin-top: ${spacing[25]};
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: ${spacing[5]};
+
+    background: linear-gradient(transparent, ${background.primary});
+
+    nav {
+      display: flex;
+      gap: ${spacing[10]};
     }
   `}
 `;

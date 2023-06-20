@@ -10,12 +10,12 @@ async function useRemoveData(
     const dataRef = ref(database, path);
 
     if (!dataRef) {
-      return callback && callback(new Error("Empty location reference"));
+      if (callback) return callback(new Error("Empty location reference"));
     }
 
     await remove(dataRef);
   } catch (err) {
-    return callback && callback(err as Error);
+    if (callback) return callback(err as Error);
   }
 }
 

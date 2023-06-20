@@ -3,14 +3,29 @@ import styled, { css } from "styled-components";
 export const Text = styled.p`
   ${({
     theme: {
-      colors: { text },
+      colors: { text, brand },
       typography: { fontFamily, fontSize, fontWeight },
+      transition,
     },
   }) => css`
     text-decoration: none;
     color: ${text.light};
     height: min-content;
     font-weight: ${fontWeight.normal};
+
+    &.hover {
+      transition: ${transition.normal};
+
+      &:hover {
+         {
+          color: ${brand.primary};
+
+          * {
+            color: ${brand.primary};
+          }
+        }
+      }
+    }
 
     // sizes
     &.small {

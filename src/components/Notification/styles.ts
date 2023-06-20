@@ -31,7 +31,6 @@ export const Container = styled.div`
     gap: ${spacing[10]};
 
     background: ${translucentBackground.secondary};
-    backdrop-filter: ${filter.blur};
 
     animation: ${apearAnimation} 1s;
 

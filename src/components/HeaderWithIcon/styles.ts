@@ -18,7 +18,6 @@ export const Container = styled.div`
     gap: ${spacing[10]};
 
     background: ${translucentBackground.secondary};
-    backdrop-filter: ${filter.blur};
 
     user-select: none;
 

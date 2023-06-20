@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 
-export const Input = styled.input`
+export const Select = styled.select`
   ${({
     theme: {
-      colors: { text, translucentBackground, background, semantic },
+      colors: { text, translucentBackground, semantic, background },
       typography: { fontFamily, fontWeight, fontSize },
       filter,
       spacing,
@@ -26,12 +26,13 @@ export const Input = styled.input`
 
     transition: ${transition.normal};
 
-    // special
-    &::placeholder {
-      font-family: ${fontFamily.normal};
-      font-weight: ${fontWeight.normal};
-      font-size: ${fontSize.base};
-      color: ${background.tertiary};
+    option {
+      background: ${background.secondary};
+      color: ${text.light};
+    }
+
+    option:hover {
+      background-color: ${background.primary};
     }
 
     // states

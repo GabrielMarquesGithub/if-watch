@@ -45,13 +45,19 @@ function Room() {
       addListener: !!room,
     },
     (data) => setRoomInfo(data),
-    (error) => {}
+    (error) => {
+      throw error;
+    }
   );
 
   const handleRoomDelete = async () => {
     if (!room) return;
-    await useRemoveData("roomsInfo/" + room.roomInfoId);
-    await useRemoveData("rooms/" + room.id);
+    await useRemoveData("roomsInfo/" + room.roomInfoId, (error) => {
+      throw error;
+    });
+    await useRemoveData("rooms/" + room.id, (error) => {
+      throw error;
+    });
     navigate(
       rooms && rooms.length >= 2
         ? "/room/" + (rooms[0].id !== room.id ? rooms[0].id : rooms[1].id)

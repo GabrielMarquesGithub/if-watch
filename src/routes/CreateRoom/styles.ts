@@ -1,14 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
 
-const mainApearAnimation = keyframes`
-0%{
-  transform: translateY(300px);
-}
-100%{
-  transform: translateY(0px);
-}
-`;
-
 export const Container = styled.section`
   ${({ theme: { spacing } }) => css`
     display: flex;
@@ -18,8 +9,6 @@ export const Container = styled.section`
     section:last-child {
       display: grid;
       gap: ${spacing[20]};
-
-      animation: ${mainApearAnimation} 1.5s;
     }
 
     main {
@@ -32,7 +21,7 @@ export const Container = styled.section`
       grid-template-areas:
         "name name"
         "description local"
-        "description local"
+        "description type"
         "button button";
       gap: ${spacing[10]};
 
@@ -50,6 +39,10 @@ export const Container = styled.section`
 
       button {
         grid-area: button;
+      }
+
+      select {
+        grid-area: type;
       }
     }
   `}

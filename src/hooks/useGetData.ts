@@ -21,7 +21,6 @@ function useGetData<T>(
       if (!roomsData) {
         return callback && callback(new Error("Empty data"));
       }
-      console.log(roomsData);
       // Convertendo o formato vindo do realtime em array para facilitar formatações
       // Isso está sendo feito aqui para evitar acoplamento
       action(Object.values(roomsData) as T);

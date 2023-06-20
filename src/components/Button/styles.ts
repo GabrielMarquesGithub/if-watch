@@ -21,7 +21,6 @@ export const Button = styled.button`
     align-items: center;
 
     background: ${translucentBackground.primary};
-    backdrop-filter: ${filter.blur};
 
     user-select: none;
     cursor: pointer;
@@ -44,7 +43,6 @@ export const Button = styled.button`
     // variants
     &.transparent {
       background-color: transparent;
-      backdrop-filter: none;
 
       // states
       &:hover {

@@ -10,6 +10,4 @@ export interface IRoomCardProps
     | "movement"
     | "openDoor"
     | "airOn"
-  > {
-  disabled?: boolean;
-}
+  > {}

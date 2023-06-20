@@ -7,4 +7,5 @@ export interface ITextProps
   size?: "small" | "base" | "big" | "huge";
   decoration?: "underline";
   lineLimit?: 1 | 2;
+  hover?: boolean;
 }

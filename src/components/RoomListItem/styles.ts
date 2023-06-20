@@ -33,7 +33,7 @@ export const Container = styled.li`
       position: absolute;
       top: 0px;
       left: 0px;
-      z-index: -1;
+      z-index: 1;
 
       transform: translateX(-300px);
       transition: ${transition.slow};

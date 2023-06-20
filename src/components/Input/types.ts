@@ -2,7 +2,7 @@ import { InputHTMLAttributes } from "react";
 
 type inputPropsType = Required<
   Pick<
-    InputHTMLAttributes<HTMLInputElement>,
+    InputHTMLAttributes<HTMLSelectElement>,
     "type" | "aria-label" | "spellCheck" | "aria-autocomplete" | "placeholder"
   >
 > &

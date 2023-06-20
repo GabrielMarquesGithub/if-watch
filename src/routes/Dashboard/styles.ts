@@ -28,7 +28,6 @@ export const Container = styled.div`
       grid-template-rows: 100px 1fr 100px;
 
       background: ${translucentBackground.secondary};
-      backdrop-filter: ${blur};
 
       animation: ${asideApearAnimation} 400ms;
 

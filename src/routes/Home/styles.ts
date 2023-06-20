@@ -2,7 +2,7 @@ import styled, { css, keyframes } from "styled-components";
 
 const mainApearAnimation = keyframes`
 0%{
-  transform: translateY(300px);
+  transform: translateY(15vh);
 }
 100%{
   transform: translateY(0px);

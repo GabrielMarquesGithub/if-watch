@@ -20,7 +20,6 @@ export const Textarea = styled.textarea`
     resize: none;
 
     background: ${translucentBackground.secondary};
-    backdrop-filter: ${filter.blur};
 
     font-family: ${fontFamily.normal};
     font-weight: ${fontWeight.normal};

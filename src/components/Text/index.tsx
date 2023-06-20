@@ -7,11 +7,12 @@ function Text({
   size = "base",
   decoration,
   lineLimit,
+  hover,
   ...rest
 }: ITextProps) {
   const classNames = `${font} ${size} ${decoration} ${
     lineLimit && `lineLimit lineLimit-${lineLimit}`
-  }`;
+  } ${hover && "hover"}`;
 
   return <S.Text as={is} className={classNames} {...rest} />;
 }

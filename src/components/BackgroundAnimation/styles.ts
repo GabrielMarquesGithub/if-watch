@@ -44,7 +44,6 @@ export const Object = styled.li<IObjectStyleProps>`
     display: block;
 
     background: ${text.light};
-    backdrop-filter: blur(5%);
 
     list-style: none;
 

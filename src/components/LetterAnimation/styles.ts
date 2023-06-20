@@ -38,7 +38,6 @@ export const Letter = styled.span<ILetterStyleProps>`
       ${background.primary}
     );
     background-size: 200% 100%;
-    backdrop-filter: ${filter.blur};
 
     transform-origin: bottom center;
     animation: ${textWaveAnimation} 1s ease-in-out infinite;

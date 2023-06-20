@@ -13,6 +13,7 @@ import { ICreateRoomModel } from "../../models/room.model";
 import { Input } from "../../components/Input";
 import { Textarea } from "../../components/Textarea";
 import { Button } from "../../components/Button";
+import { Select } from "../../components/Select";
 
 const BASE: ICreateRoomModel = {
   name: "",
@@ -23,6 +24,18 @@ const BASE: ICreateRoomModel = {
   openDoor: false,
   airOn: false,
 };
+
+const roomTypes: ICreateRoomModel["type"][] = [
+  "office",
+  "classroom",
+  "laboratory",
+];
+
+const roomTypesOptions = [
+  { text: "Escritório", value: roomTypes[1] },
+  { text: "Sala de Aula", value: roomTypes[2] },
+  { text: "Laboratório", value: roomTypes[3] },
+];
 
 function CreateRoom() {
   const { setRoom } = useContext(roomContext);
@@ -66,6 +79,20 @@ function CreateRoom() {
               error={!newRoom.local}
               onChange={(e) =>
                 setNewRoom((room) => ({ ...room, local: e.target.value }))
+              }
+            />
+            <Select
+              options={roomTypesOptions}
+              aria-autocomplete="list"
+              spellCheck={true}
+              aria-label="Digite o local da sala"
+              placeholder="Tipo de sala"
+              error={!newRoom.type}
+              onChange={(e) =>
+                setNewRoom((room) => ({
+                  ...room,
+                  type: e.target.value as ICreateRoomModel["type"],
+                }))
               }
             />
             <Textarea

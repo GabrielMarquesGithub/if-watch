@@ -19,17 +19,12 @@ export const Container = styled.div`
     overflow: hidden;
 
     background: ${translucentBackground.secondary};
-    backdrop-filter: ${filter.blur};
 
     transition: ${transition.normal};
 
     // states
-    &:not(.disabled):hover {
-      backdrop-filter: ${filter.blur};
-
+    &:hover {
       cursor: pointer;
-
-      transform: scale(1.02);
     }
 
     // children
@@ -63,7 +58,6 @@ export const Container = styled.div`
           align-items: center;
 
           background: ${translucentBackground.secondary};
-          backdrop-filter: ${filter.blur};
         }
       }
     }

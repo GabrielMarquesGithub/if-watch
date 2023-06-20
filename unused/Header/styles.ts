@@ -42,7 +42,6 @@ export const Header = styled.header`
         z-index: -1;
 
         background: ${translucentBackground.secondary};
-        backdrop-filter: ${filter.blur};
 
         animation: ${headerApearAnimation} 2s;
       }
