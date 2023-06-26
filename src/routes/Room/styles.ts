@@ -9,7 +9,7 @@ const headerApearAnimation = keyframes`
 }
 `;
 
-export const Container = styled.div`
+export const Container = styled.section`
   ${({
     theme: {
       spacing,
@@ -18,6 +18,12 @@ export const Container = styled.div`
     },
   }) => css`
     width: 100%;
+    padding: ${spacing[20]};
+
+    display: grid;
+    grid-template-columns: 1fr calc(60px);
+    grid-template-areas: "header header" "none aside";
+    gap: ${spacing[20]};
 
     //state
     &.isLoading {
@@ -28,10 +34,11 @@ export const Container = styled.div`
     }
 
     // children
-    header {
+    & > header {
+      grid-area: header;
+
       height: 80px;
       padding: ${spacing[20]};
-      margin: ${spacing[20]};
       border-radius: ${borderRadius.base};
 
       display: flex;
@@ -61,6 +68,20 @@ export const Container = styled.div`
           gap: ${spacing[5]};
         }
       }
+    }
+
+    & > aside {
+      grid-area: aside;
+    }
+
+    form {
+      div {
+        display: flex;
+        gap: ${spacing[10]};
+      }
+      display: flex;
+      flex-direction: column;
+      gap: ${spacing[10]};
     }
   `}
 `;

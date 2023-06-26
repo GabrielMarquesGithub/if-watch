@@ -14,6 +14,7 @@ import { Input } from "../../components/Input";
 import { Textarea } from "../../components/Textarea";
 import { Button } from "../../components/Button";
 import { Select } from "../../components/Select";
+import { roomTypesEnum } from "../../enums/roomTypes.enum";
 
 const BASE: ICreateRoomModel = {
   name: "",
@@ -25,17 +26,10 @@ const BASE: ICreateRoomModel = {
   airOn: false,
 };
 
-const roomTypes: ICreateRoomModel["type"][] = [
-  "office",
-  "classroom",
-  "laboratory",
-];
-
-const roomTypesOptions = [
-  { text: "Escritório", value: roomTypes[1] },
-  { text: "Sala de Aula", value: roomTypes[2] },
-  { text: "Laboratório", value: roomTypes[3] },
-];
+const roomTypesOptions = Object.keys(roomTypesEnum).map((roomType) => ({
+  value: roomType,
+  text: roomTypesEnum[roomType as keyof typeof roomTypesEnum],
+}));
 
 function CreateRoom() {
   const { setRoom } = useContext(roomContext);
@@ -85,8 +79,7 @@ function CreateRoom() {
               options={roomTypesOptions}
               aria-autocomplete="list"
               spellCheck={true}
-              aria-label="Digite o local da sala"
-              placeholder="Tipo de sala"
+              aria-label="Escolha o tipo da sala"
               error={!newRoom.type}
               onChange={(e) =>
                 setNewRoom((room) => ({

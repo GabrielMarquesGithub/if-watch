@@ -4,7 +4,6 @@ export const Button = styled.button`
   ${({
     theme: {
       colors: { background, translucentBackground },
-      filter,
       spacing,
       borderRadius,
       transition,
@@ -40,16 +39,6 @@ export const Button = styled.button`
       }
     }
 
-    // variants
-    &.transparent {
-      background-color: transparent;
-
-      // states
-      &:hover {
-        background-color: ${translucentBackground.primary};
-      }
-    }
-
     // size
     &.base {
       height: 60px;
@@ -74,6 +63,31 @@ export const Button = styled.button`
 
     &.full {
       width: 100%;
+    }
+
+    // variants
+    &.transparent {
+      background-color: transparent;
+
+      // states
+      &:hover {
+        background-color: ${translucentBackground.primary};
+      }
+    }
+
+    &.none {
+      height: unset !important;
+      max-width: unset !important;
+      min-width: unset !important;
+      width: unset !important;
+      padding: unset;
+
+      background-color: transparent;
+
+      // states
+      &:hover {
+        background-color: transparent;
+      }
     }
 
     // children

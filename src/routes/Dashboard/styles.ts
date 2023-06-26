@@ -20,7 +20,7 @@ export const Container = styled.div`
     display: flex;
 
     // children
-    aside {
+    & > aside {
       height: 100vh;
       min-width: 300px;
 
@@ -32,19 +32,19 @@ export const Container = styled.div`
       animation: ${asideApearAnimation} 400ms;
 
       // children
-      header {
+      & > header {
         justify-self: center;
 
         padding: ${spacing[20]};
       }
 
-      ul {
+      & > ul {
         display: grid;
         gap: 0px;
         grid-template-rows: repeat(5, 1fr);
       }
 
-      footer {
+      & > footer {
         padding: ${spacing[20]};
 
         .decrease-button {
@@ -58,7 +58,7 @@ export const Container = styled.div`
       }
     }
 
-    main {
+    & > main {
       width: 100%;
     }
   `}
